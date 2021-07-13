@@ -1,13 +1,12 @@
 package io.muzoo.ssc.project.backend.auth;
 
+import io.muzoo.ssc.project.backend.SimpleResponseDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @RestController
 public class AuthenticationController {
@@ -18,25 +17,41 @@ public class AuthenticationController {
     }
 
     @PostMapping("/api/login")
-    public String login(HttpServletRequest req) {
+    public SimpleResponseDTO login(HttpServletRequest req) {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         try {
             req.login(username, password);
-            return "login successful";
+            return SimpleResponseDTO
+                    .builder()
+                    .success(true)
+                    .message("successfully log in!")
+                    .build();
         } catch (ServletException e) {
-            return "failed to login";
+            return SimpleResponseDTO
+                    .builder()
+                    .success(false)
+                    .message("incorrect username or password, failed to log in!")
+                    .build();
         }
 
     }
 
     @GetMapping("/api/logout")
-    public String logout(HttpServletRequest req) {
+    public SimpleResponseDTO logout(HttpServletRequest req) {
         try {
             req.logout();
-            return "logout successful";
+            return SimpleResponseDTO
+                    .builder()
+                    .success(true)
+                    .message("successfully log out!")
+                    .build();
         } catch (ServletException e) {
-            return "failed to logout";
+            return SimpleResponseDTO
+                    .builder()
+                    .success(false)
+                    .message("failed to log out!")
+                    .build();
         }
     }
 
