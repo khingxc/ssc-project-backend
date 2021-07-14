@@ -1,6 +1,8 @@
 package io.muzoo.ssc.project.backend.auth;
 
 import io.muzoo.ssc.project.backend.SimpleResponseDTO;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +23,11 @@ public class AuthenticationController {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         try {
+//             Check if there is a current user logged in, if so log out first
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (principal != null && principal instanceof User) {
+                req.logout();
+            }
             req.login(username, password);
             return SimpleResponseDTO
                     .builder()

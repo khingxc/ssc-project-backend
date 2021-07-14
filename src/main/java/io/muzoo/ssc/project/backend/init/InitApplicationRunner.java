@@ -29,4 +29,5 @@ public class InitApplicationRunner implements ApplicationRunner {
             userRepository.save(admin);
         }
     }
+
 }

@@ -3,7 +3,6 @@ package io.muzoo.ssc.project.backend;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.context.annotation.Bean;
 
 @Getter
 @Setter

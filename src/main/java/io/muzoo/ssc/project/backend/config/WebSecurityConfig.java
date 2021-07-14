@@ -36,11 +36,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// disable csrf
+		//	configuring security for REST backend APIs
+		//	we will not login using form login anymore
+		// disable csrf, normally you shouldn't but life is a lot easier without it
 		http.csrf().disable();
+
+		//	permit login logout
 		http.authorizeRequests()
-				.antMatchers("/", "api/login", "/api/logout")
+				.antMatchers("/", "/api/login", "/api/logout", "/api/whoami")
 				.permitAll();
+		//	permit all OPTIONS requests
 		http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
 
 		// handle error output as JSON for unauthorized access
@@ -49,7 +54,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// set every other path to require authentication
 		http.authorizeRequests().antMatchers("/**").authenticated();
-
 	}
 
 	@Override
@@ -65,19 +69,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	class JsonHttp403ForbiddenEntryPoint implements AuthenticationEntryPoint{
 
-
 		@Override
 		public void commence(HttpServletRequest req,
 							 HttpServletResponse resp,
 							 AuthenticationException authException) throws IOException, ServletException {
-			// output JSON message
 
+			// output JSON message
 			String ajaxJson = AjaxUtils.convertToString(
 					SimpleResponseDTO
 							.builder()
-							.success(true)
+							.success(false)
 							.message("forbidden, no access")
-							.build());
+							.build()
+			);
 			resp.setCharacterEncoding("UTF-8");
 			resp.setContentType("application/json");
 			resp.getWriter().println(ajaxJson);
