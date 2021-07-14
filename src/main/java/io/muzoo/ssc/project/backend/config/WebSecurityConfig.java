@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// disable csrf
 		http.csrf().disable();
 		http.authorizeRequests()
-				.antMatchers("/", "/api/login", "/api/logout")
+				.antMatchers("/", "/api/login", "/api/logout", "/api/whoami")
 				.permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
 
@@ -75,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			String ajaxJson = AjaxUtils.convertToString(
 					SimpleResponseDTO
 							.builder()
-							.success(true)
+							.success(false)
 							.message("forbidden, no access")
 							.build());
 			resp.setCharacterEncoding("UTF-8");
