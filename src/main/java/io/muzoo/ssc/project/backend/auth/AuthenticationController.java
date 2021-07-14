@@ -1,6 +1,7 @@
 package io.muzoo.ssc.project.backend.auth;
 
 import io.muzoo.ssc.project.backend.SimpleResponseDTO;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,11 @@ public class AuthenticationController {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         try {
+            // logging in twice hash an error
+            Object principle = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (principle != null && principle instanceof org.springframework.security.core.userdetails.User) {
+                req.logout();
+            }
             req.login(username, password);
             return SimpleResponseDTO
                     .builder()
@@ -31,7 +37,7 @@ public class AuthenticationController {
             return SimpleResponseDTO
                     .builder()
                     .success(false)
-                    .message("incorrect username or password, failed to log in!")
+                    .message(e.getMessage())
                     .build();
         }
 
@@ -50,7 +56,7 @@ public class AuthenticationController {
             return SimpleResponseDTO
                     .builder()
                     .success(false)
-                    .message("failed to log out!")
+                    .message(e.getMessage())
                     .build();
         }
     }
