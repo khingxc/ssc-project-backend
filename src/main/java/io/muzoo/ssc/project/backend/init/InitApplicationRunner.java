@@ -1,6 +1,6 @@
 package io.muzoo.ssc.project.backend.init;
 
-import io.muzoo.ssc.project.backend.User;
+import io.muzoo.ssc.project.backend.auth.User;
 import io.muzoo.ssc.project.backend.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -20,10 +20,11 @@ public class InitApplicationRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         // add default admin user and set its password if missing
-        User admin = userRepository.findFirstByUsername("admin");
+        User admin = userRepository.findFirstByEmail("admin@hahaha.com");
         if (admin == null){
             admin = new User();
-            admin.setUsername("admin");
+            admin.setEmail("admin@hahaha.com");
+            admin.setDisplayName("I am Admin");
             admin.setPassword(passwordEncoder.encode("123456"));
             admin.setRole("USER");
             userRepository.save(admin);

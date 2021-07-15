@@ -5,7 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.muzoo.ssc.project.backend.UserRepository;
-import io.muzoo.ssc.project.backend.User;
+import io.muzoo.ssc.project.backend.auth.User;
 
 /**
  * A controller to retrieve current logged-in user
@@ -15,7 +15,6 @@ public class WhoamiController {
 
     @Autowired
     private UserRepository userRepository;
-
 
     /**
      * Make sure that all API paths begin with /api
@@ -28,13 +27,13 @@ public class WhoamiController {
             if (principal != null && principal instanceof org.springframework.security.core.userdetails.User){
 //                user is logged in
                 org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) principal;
-                User u = userRepository.findFirstByUsername(user.getUsername());
+                User u = userRepository.findFirstByEmail(user.getUsername());
 
                 return WhoamiDTO.builder()
                         .loggedin(true)
-                        .name(u.getUsername()) // we can add field "name" later (name is in frontend part)
+                        .email(u.getEmail()) // we can add field "name" later (name is in frontend part)
                         .role(u.getRole())
-                        .username(u.getUsername())
+                        .displayName(u.getDisplayName())
                         .build();
             }
         } catch (Exception ignored){

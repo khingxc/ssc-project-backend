@@ -13,9 +13,9 @@ public class WhoamiDTO {
 
     private boolean loggedin = false;
 
-    private String username;
+    private String email;
 
-    private String name;
+    private String displayName;
 
     private String role;
 }

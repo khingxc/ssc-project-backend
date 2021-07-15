@@ -1,4 +1,4 @@
-package io.muzoo.ssc.project.backend;
+package io.muzoo.ssc.project.backend.auth;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,9 +16,11 @@ public class User {
     private long id;
 
     @Column(unique = true)
-    private String username;
+    private String email;
 
     private String password;
 
     private String role;
+
+    private String displayName;
 }
