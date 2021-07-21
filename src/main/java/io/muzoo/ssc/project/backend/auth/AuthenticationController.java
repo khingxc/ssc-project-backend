@@ -1,7 +1,6 @@
 package io.muzoo.ssc.project.backend.auth;
 
 import io.muzoo.ssc.project.backend.SimpleResponseDTO;
-import io.muzoo.ssc.project.backend.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -74,7 +73,7 @@ public class AuthenticationController {
     public SimpleResponseDTO signup(HttpServletRequest req) throws UserServiceException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        String displayName = req.getParameter("display_name");
+        String displayName = req.getParameter("displayName");
         try {
             io.muzoo.ssc.project.backend.auth.User newUser = userRepository.findFirstByEmail(email);
             if (newUser == null) {
@@ -105,9 +104,7 @@ public class AuthenticationController {
     public SimpleResponseDTO changePass(HttpServletRequest req){
         String email = req.getParameter("email");
         String newPassword = req.getParameter("password");
-
         io.muzoo.ssc.project.backend.auth.User user = userRepository.findFirstByEmail(email);
-
         user.setPassword(newPassword);
         userRepository.save(user);
         return SimpleResponseDTO.builder()
