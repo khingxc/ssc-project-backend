@@ -36,14 +36,15 @@ public class QnAController extends SuperController {
         int first = 0;
         int second = 0;
         int third = 0;
-        while ((first != second) && (second != third) && (first != third)) {
+        while ((second == third) && (first == third)) {
             first = RANDOM.nextInt(tableSize);
             second = RANDOM.nextInt(tableSize);
             third = RANDOM.nextInt(tableSize);
         }
-        qlist.add(quesAdminRepo.findFirstByQid(first));
-        qlist.add(quesAdminRepo.findFirstByQid(second));
-        qlist.add(quesAdminRepo.findFirstByQid(third));
+        List<Question> questions = quesAdminRepo.findAll();
+        qlist.add(questions.get(first));
+        qlist.add(questions.get(second));
+        qlist.add(questions.get(third));
 //        request.setAttribute();
         return SimpleResponseDTO.builder()
                 .success(true)
