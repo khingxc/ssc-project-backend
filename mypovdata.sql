@@ -140,7 +140,7 @@ CREATE TABLE `tbl_tasks` (
   `date` varchar(255) NOT NULL,
   PRIMARY KEY (`task_id`),
   UNIQUE KEY `tbl_tasks_task_id_uindex` (`task_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +149,7 @@ CREATE TABLE `tbl_tasks` (
 
 LOCK TABLES `tbl_tasks` WRITE;
 /*!40000 ALTER TABLE `tbl_tasks` DISABLE KEYS */;
-INSERT INTO `tbl_tasks` VALUES (1,'admin@hahaha.com','drink water 8 times a day','false','2021-07-22'),(2,'admin@hahaha.com','drink water 8 times a day','false','2021-07-22');
+INSERT INTO `tbl_tasks` VALUES (1,'admin@hahaha.com','drink water 8 times a day','false','2021-07-22'),(2,'admin@hahaha.com','drink water 8 times a day','false','2021-07-22'),(22,'khungkhing@yahoo.com','watch a movie','false','2021-07-23'),(23,'khungkhing@yahoo.com','ssc presentation','false','2021-07-23');
 /*!40000 ALTER TABLE `tbl_tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,7 +168,7 @@ CREATE TABLE `tbl_user` (
   `role` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `tbl_user_id_uindex` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,7 +177,7 @@ CREATE TABLE `tbl_user` (
 
 LOCK TABLES `tbl_user` WRITE;
 /*!40000 ALTER TABLE `tbl_user` DISABLE KEYS */;
-INSERT INTO `tbl_user` VALUES (6,'admin@hahaha.com','$2a$10$I9pyssylSoNZ.seFNUWEu..WcVaUmt7yGmPNInv7ohpiWLQh43uAO','I am Admin','USER'),(8,'khungkhing@yahoo.com','$2a$10$5c.ji6H3jpxvujhVCRuawORC/Eb9zPs2o7fuG/TS.rmtf5y/ZOOhq','khungkhing','Admin');
+INSERT INTO `tbl_user` VALUES (6,'admin@hahaha.com','$2a$10$I9pyssylSoNZ.seFNUWEu..WcVaUmt7yGmPNInv7ohpiWLQh43uAO','I am Admin','USER'),(8,'khungkhing@yahoo.com','$2a$10$5c.ji6H3jpxvujhVCRuawORC/Eb9zPs2o7fuG/TS.rmtf5y/ZOOhq','khungkhing','Admin'),(10,'pearypear@yahoo.com','$2a$10$nJ6YJxG/G6.GyytUycJeDu8StYnA3km/4QzV6nCTwE/27WC1C3fby','pear','USER'),(11,'litaaaa@yahoo.com','$2a$10$3qIke09yTXXlxJAxAp7UFevsymvla3TNun0K18rQk8joVOpLjisPq','lita','USER');
 /*!40000 ALTER TABLE `tbl_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -190,4 +190,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-23  2:35:07
+-- Dump completed on 2021-07-23  5:42:47
