@@ -20,7 +20,6 @@ public class QuestionController {
     @Autowired
     private UserRepository userRepository;
 
-
     private User getCurrentUser(){
         User u = null;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -61,8 +60,6 @@ public class QuestionController {
     public SimpleResponseDTO removeQuestion(HttpServletRequest request){
         long qid = Long.parseLong(request.getParameter("qid"));
         if (isAdmin(getCurrentUser())){
-
-//            Question q = quesAdminRepo.findFirstByQid(qid);
             quesAdminRepo.deleteByQid(qid);
             return SimpleResponseDTO.builder()
                     .message("successfully remove ques")

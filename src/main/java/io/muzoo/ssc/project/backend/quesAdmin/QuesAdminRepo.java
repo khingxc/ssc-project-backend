@@ -14,4 +14,5 @@ public interface QuesAdminRepo extends JpaRepository<Question, Long> {
 //    Question findFirstByQtext(String qtext);
 
     void deleteByQid(long qid);
+
 }
