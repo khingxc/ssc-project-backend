@@ -12,5 +12,5 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     List<Task> findTasksByEmailAndCompleted(String email, String completed);
 
-    Task findFirstByTaskDescription(String taskDesc);
+    Task findFirstByTaskDescriptionAndEmail(String taskDesc, String email);
 }
