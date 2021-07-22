@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 
 @RestController
@@ -35,7 +36,9 @@ public class QuestionController {
     }
 
     @PostMapping("/api/add_ques")
-    private SimpleResponseDTO addQuestion(String qtext){
+    public SimpleResponseDTO addQuestion(HttpServletRequest request){
+
+        String qtext = request.getParameter("qtext");
         if (isAdmin(getCurrentUser())){
             Question q = new Question();
             q.setQtext(qtext);
@@ -55,19 +58,20 @@ public class QuestionController {
     }
 
     @PostMapping("/api/rmv_ques")
-    private SimpleResponseDTO removeQuestion(long qid){
+    public SimpleResponseDTO removeQuestion(HttpServletRequest request){
+        long qid = Long.parseLong(request.getParameter("qid"));
         if (isAdmin(getCurrentUser())){
 
+//            Question q = quesAdminRepo.findFirstByQid(qid);
             quesAdminRepo.deleteByQid(qid);
-
             return SimpleResponseDTO.builder()
-                    .message("successfully add remove ques")
+                    .message("successfully remove ques")
                     .success(true)
                     .build();
         } else {
             return SimpleResponseDTO.builder()
                     .success(false)
-                    .message("failed to remove new ques")
+                    .message("failed to remove ques")
                     .build();
         }
     }
