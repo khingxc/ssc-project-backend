@@ -43,7 +43,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		//	permit login logout
 		http.authorizeRequests()
-				.antMatchers("/", "/api/login", "/api/logout", "/api/whoami", "/api/signup")
+				.antMatchers("/",
+						"/api/login",
+						"/api/logout",
+						"/api/whoami",
+						"/api/signup",
+						"/api/create_task",
+						"/api/showCurrentTasks"
+
+						)
 				.permitAll();
 
 		//	permit all OPTIONS requests

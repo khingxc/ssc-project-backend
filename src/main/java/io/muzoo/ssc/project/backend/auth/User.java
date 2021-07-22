@@ -7,12 +7,11 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name= "tbl_user")
-
+@Table(name="tbl_user")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private long id;
 
     @Column(unique = true)

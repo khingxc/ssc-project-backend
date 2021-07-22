@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import io.muzoo.ssc.project.backend.UserRepository;
+import io.muzoo.ssc.project.backend.auth.UserRepository;
 import io.muzoo.ssc.project.backend.auth.User;
 
 /**
