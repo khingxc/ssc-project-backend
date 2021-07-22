@@ -83,7 +83,7 @@ CREATE TABLE `tbl_ques_admin` (
   PRIMARY KEY (`qid`),
   UNIQUE KEY `tbl_ques_admin_qid_uindex` (`qid`),
   UNIQUE KEY `tbl_ques_admin_qtext_uindex` (`qtext`) USING HASH
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,6 +92,7 @@ CREATE TABLE `tbl_ques_admin` (
 
 LOCK TABLES `tbl_ques_admin` WRITE;
 /*!40000 ALTER TABLE `tbl_ques_admin` DISABLE KEYS */;
+INSERT INTO `tbl_ques_admin` VALUES (2,'Tell me the happiest thing happening today !','2021-07-23'),(3,'Am I achieving the goals that I’ve set for myself ?','2021-07-23'),(4,'What worries you the most about the future','2021-07-23'),(5,'Tell me the moment  you’ll never forget in your life','2021-07-23'),(6,'You couldn’t imagine living without …','2021-07-23'),(7,'What does unconditional love look like for you ?','2021-07-23'),(8,'Make a list of the people in your life who genuinely support you','2021-07-23'),(9,'Write about your first love- whether it is a person, place, or thing.','2021-07-23'),(10,'Use only 3 words to describe yourself','2021-07-23'),(11,'What can you learn from your biggest mistakes ?','2021-07-23'),(12,'Write the words you need to hear.','2021-07-23'),(13,'Make a list of everything you’d like to say no to.','2021-07-23'),(14,'Make a list of everything you’d like to say yes to.','2021-07-23'),(15,'You really wish others knew this about you...','2021-07-23'),(16,'What’s happening in your life right now and how do you feel about it ?','2021-07-23'),(17,'Tell me the things that lift you up or make you laugh','2021-07-23'),(18,'Tell me the things that bring you down or make you cry','2021-07-23'),(19,'What is your biggest goal, hope, dream, or desire these days ?','2021-07-23'),(20,'Are you using your time wisely ?','2021-07-23'),(21,'What is your childhood dream? Will you achieve it?','2021-07-23');
 /*!40000 ALTER TABLE `tbl_ques_admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,4 +190,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-23  0:57:02
+-- Dump completed on 2021-07-23  2:35:07

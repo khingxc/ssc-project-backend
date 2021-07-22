@@ -45,6 +45,7 @@ public class QnAController extends SuperController {
         qlist.add(questions.get(first));
         qlist.add(questions.get(second));
         qlist.add(questions.get(third));
+
 //        request.setAttribute();
         return SimpleResponseDTO.builder()
                 .success(true)
