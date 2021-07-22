@@ -74,6 +74,7 @@ public class AuthenticationController {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String displayName = req.getParameter("displayName");
+        String role = req.getParameter("role");
         try {
             io.muzoo.ssc.project.backend.auth.User newUser = userRepository.findFirstByEmail(email);
             if (newUser == null) {
@@ -81,7 +82,11 @@ public class AuthenticationController {
                 newUser.setEmail(email);
                 newUser.setPassword(passwordEncoder.encode(password));
                 newUser.setDisplayName(displayName);
-                newUser.setRole("USER");
+                if (role.isEmpty()){
+                    newUser.setRole("USER");
+                }
+                newUser.setRole(role);
+
                 userRepository.save(newUser);
                 return SimpleResponseDTO.builder()
                         .success(true)
