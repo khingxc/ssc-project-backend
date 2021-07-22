@@ -11,15 +11,15 @@ import javax.persistence.*;
 public class Task {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true)
-    private long taskID; //increase
+    private long task_id; //increase
 
-    private String email; //whoami
+    private String email;
 
     private String taskDescription; //text
 
     private String completed; //done
 
-    private String date; //date (not implemented yet)
+    private String date; //date
 }

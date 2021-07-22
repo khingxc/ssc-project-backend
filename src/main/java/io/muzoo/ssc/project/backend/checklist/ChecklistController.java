@@ -40,15 +40,22 @@ public class ChecklistController {
     public SimpleResponseDTO createTask(HttpServletRequest req){
         String text = req.getParameter("text");
         String completed = req.getParameter("done");
-        String date = LocalDate.now().toString();
-        String email = getCurrentUser().getEmail();
 
+        User currentUser = getCurrentUser();
+        if ( currentUser == null){
+            return SimpleResponseDTO.builder()
+                    .success(false)
+                    .message("haven't logged in to create task yet")
+                    .build();
+        }
         Task newTask = new Task();
-        newTask.setEmail(email);
+
+        newTask.setEmail(currentUser.getEmail());
         newTask.setTaskDescription(text);
         newTask.setCompleted(completed);
-        newTask.setDate(date);
+        newTask.setDate(LocalDate.now().toString());
 
+        taskRepository.save(newTask);
         return SimpleResponseDTO.builder()
                 .success(true)
                 .message("successfully created a task")
@@ -58,8 +65,9 @@ public class ChecklistController {
 
     @PostMapping("/api/show_current_tasks")
     public SimpleResponseDTO showCurrentTasks(HttpServletRequest req){
-        String email = getCurrentUser().getEmail();
-        List<Task> tasks = taskRepository.findTasksByEmailAndCompleted(email, "false");
+
+        User currentUser = getCurrentUser();
+        List<Task> tasks = taskRepository.findTasksByEmailAndCompleted(currentUser.getEmail(), "false");
 
 //        req.setAttribute("current_tasks", tasks);
 //      Find a way to give the data back to the user
@@ -72,8 +80,8 @@ public class ChecklistController {
 
     @PostMapping("/api/show_all_tasks")
     public SimpleResponseDTO showAllTasks(HttpServletRequest req){
-        String email = getCurrentUser().getEmail();
-        List<Task> tasks = taskRepository.findTasksByEmail(email);
+        User currentUser = getCurrentUser();
+        List<Task> tasks = taskRepository.findTasksByEmail(currentUser.getEmail());
 
 //      Find a way to give the data back to the user
         return SimpleResponseDTO.builder()

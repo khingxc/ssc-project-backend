@@ -70,7 +70,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/api/signup")
-    public SimpleResponseDTO signup(HttpServletRequest req) throws UserServiceException {
+    public SimpleResponseDTO signup(HttpServletRequest req) {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String displayName = req.getParameter("displayName");
