@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 @Builder
 public class SimpleResponseDTO {
-
     private boolean success;
     private String message;
 }

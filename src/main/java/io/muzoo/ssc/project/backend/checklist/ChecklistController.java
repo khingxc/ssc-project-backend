@@ -51,7 +51,6 @@ public class ChecklistController extends SuperController {
 
     @PostMapping("/api/show_current_tasks")
     public SimpleResponseDTO showCurrentTasks(HttpServletRequest req){
-
         User currentUser = getCurrentUser();
         if (currentUser == null){
             return SimpleResponseDTO.builder()
@@ -65,7 +64,6 @@ public class ChecklistController extends SuperController {
             currentTasks.add(task.getTaskDescription());
         }
         req.setAttribute("current_tasks", currentTasks);
-
         return SimpleResponseDTO.builder()
                 .success(true)
                 .message("successfully show user their current tasks")
@@ -98,7 +96,6 @@ public class ChecklistController extends SuperController {
     @PostMapping("/api/finish_task")
     public SimpleResponseDTO completeTask(HttpServletRequest req){
         String text = req.getParameter("text");
-
         if (getCurrentUser() == null){
             return SimpleResponseDTO.builder()
                     .success(false)

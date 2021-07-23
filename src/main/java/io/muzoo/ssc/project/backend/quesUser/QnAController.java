@@ -47,7 +47,11 @@ public class QnAController extends SuperController {
         request.setAttribute("ques3", questions.get(third).getQtext());
         return SimpleResponseDTO.builder()
                 .success(true)
-                .message("successfully choose 3 questions")
+                .message("successfully choose 3 questions |" +
+                        questions.get(first).getQtext() + "|" +
+                        questions.get(second).getQtext() + "|" +
+                        questions.get(third).getQtext()
+                )
                 .build();
     }
 

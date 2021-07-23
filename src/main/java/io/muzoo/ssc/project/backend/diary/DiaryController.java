@@ -64,7 +64,7 @@ public class DiaryController extends SuperController {
                     .success(true)
                     .message("successfully created a diary")
                     .build();
-        }  else {
+        } else {
             return SimpleResponseDTO.builder()
                     .success(false)
                     .message("user already created a diary for this day!!")
