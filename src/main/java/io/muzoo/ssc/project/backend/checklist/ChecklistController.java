@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -59,9 +60,12 @@ public class ChecklistController extends SuperController {
                     .build();
         }
         List<Task> tasks = taskRepository.findTasksByEmailAndCompleted(currentUser.getEmail(), "false");
+        List<String> currentTasks = new ArrayList<>();
+        for (Task task: tasks){
+            currentTasks.add(task.getTaskDescription());
+        }
+        req.setAttribute("current_tasks", currentTasks);
 
-//        req.setAttribute("current_tasks", tasks);
-//      Find a way to give the data back to the user
         return SimpleResponseDTO.builder()
                 .success(true)
                 .message("successfully show user their current tasks")
@@ -79,8 +83,12 @@ public class ChecklistController extends SuperController {
                     .build();
         }
         List<Task> tasks = taskRepository.findTasksByEmail(currentUser.getEmail());
+        List<String> allTasks = new ArrayList<>();
+        for (Task task: tasks){
+            allTasks.add(task.getTaskDescription());
+        }
+        req.setAttribute("all_tasks", allTasks);
 
-//      Find a way to give the data back to the user
         return SimpleResponseDTO.builder()
                 .success(true)
                 .message("successfully show user all of their tasks")
@@ -101,7 +109,7 @@ public class ChecklistController extends SuperController {
                 text, getCurrentUser().getEmail()
         );
         task.setCompleted("true");
-
+        taskRepository.save(task);
 //      Find a way to give the data back to the user
         return SimpleResponseDTO.builder()
                 .success(true)

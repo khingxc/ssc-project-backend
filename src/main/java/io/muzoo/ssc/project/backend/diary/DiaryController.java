@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,8 +32,8 @@ public class DiaryController extends SuperController {
                     .build();
         }
         User currentUser = getCurrentUser();
-        Diary diary = diaryRepository.findDiaryByDate(date);
-
+        Diary diary = diaryRepository.findDiaryByEmailAndDate(currentUser.getEmail(), date);
+        req.setAttribute("diary_text", diary.getDiary_text());
         //      Find a way to give the data back to the user
 
         return SimpleResponseDTO.builder()
@@ -75,9 +76,11 @@ public class DiaryController extends SuperController {
     public SimpleResponseDTO showAllDiariesByEmail(HttpServletRequest req){
         User currentUser = getCurrentUser();
         List<Diary> diaries = diaryRepository.findDiariesByEmail(currentUser.getEmail());
-
-        //      Find a way to give the data back to the user
-
+        List<String> dlist = new ArrayList<>();
+        for (Diary diary: diaries) {
+            dlist.add(diary.getDiary_text());
+        }
+        req.setAttribute("diary_email", dlist);
         return SimpleResponseDTO.builder()
                 .success(true)
                 .message("successfully show all diaries by email")
@@ -111,7 +114,7 @@ public class DiaryController extends SuperController {
             diaryRepository.delete(diaryThatDay);
             return SimpleResponseDTO.builder()
                     .success(true)
-                    .message("successfully delete a diary for today")
+                    .message("successfully delete a diary for other day")
                     .build();
         }
         return SimpleResponseDTO.builder()

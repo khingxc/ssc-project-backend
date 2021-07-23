@@ -31,7 +31,6 @@ public class QnAController extends SuperController {
                     .message("haven't logged in yet")
                     .build();
         }
-        List<Question> qlist = new ArrayList<>();
         int tableSize = (int) quesAdminRepo.count();
         int first = 0;
         int second = 0;
@@ -42,11 +41,10 @@ public class QnAController extends SuperController {
             third = RANDOM.nextInt(tableSize);
         }
         List<Question> questions = quesAdminRepo.findAll();
-        qlist.add(questions.get(first));
-        qlist.add(questions.get(second));
-        qlist.add(questions.get(third));
 
-//        request.setAttribute();
+        request.setAttribute("ques1", questions.get(first).getQtext());
+        request.setAttribute("ques2", questions.get(second).getQtext());
+        request.setAttribute("ques3", questions.get(third).getQtext());
         return SimpleResponseDTO.builder()
                 .success(true)
                 .message("successfully choose 3 questions")
@@ -62,9 +60,9 @@ public class QnAController extends SuperController {
                     .build();
         }
         Map<String, String> qnamap = new HashMap<>();
-        qnamap.put(request.getParameter("ques1"), request.getParameter("ans1"));
-        qnamap.put(request.getParameter("ques2"), request.getParameter("ans2"));
-        qnamap.put(request.getParameter("ques3"), request.getParameter("ans3"));
+        qnamap.put((String) request.getAttribute("ques1"), request.getParameter("ans1"));
+        qnamap.put((String) request.getAttribute("ques2"), request.getParameter("ans2"));
+        qnamap.put((String) request.getAttribute("ques3"), request.getParameter("ans3"));
         for (Map.Entry<String, String> entry : qnamap.entrySet()) {
             QnA qna = new QnA();
             qna.setQuestion(entry.getKey());
